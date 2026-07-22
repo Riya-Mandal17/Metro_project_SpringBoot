@@ -1,0 +1,35 @@
+jrq-xsno-ogg
+
+Soumen Dey
+1:15 AM
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.*
+
+# Archives
+*.zip
+*.tar
+*.gz
+
+# Misc
+*.swp
+*.swo
+
+# Ignore GitHub Copilot settings (optional)
+.copilot/
+
+# IntelliJ build caches
+out/
