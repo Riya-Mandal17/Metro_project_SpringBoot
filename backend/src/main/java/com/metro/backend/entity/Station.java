@@ -1,6 +1,5 @@
-package com.metro.backend.Entity;
+package com.metro.backend.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,12 +7,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "stations")
 public class Station {
-    @Column
+
     @Id
     private int id;
-    @Column
     private String name;
-    @Column
     private String line;
 
     public int getId() {
