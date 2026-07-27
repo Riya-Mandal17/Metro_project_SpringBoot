@@ -1,4 +1,4 @@
-package com.metro.backend.entity;
+package com.metro.backend.entity.sqlite;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

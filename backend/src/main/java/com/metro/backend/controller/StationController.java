@@ -1,6 +1,6 @@
 package com.metro.backend.controller;
 
-import com.metro.backend.entity.Station;
+import com.metro.backend.entity.sqlite.Station;
 import com.metro.backend.service.StationService;
 
 import org.springframework.web.bind.annotation.GetMapping;
