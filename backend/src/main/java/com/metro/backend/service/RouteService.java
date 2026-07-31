@@ -1,36 +1,30 @@
 package com.metro.backend.service;
 
+import com.metro.backend.algorithm.Dijkstra;
+import com.metro.backend.cache.MetroDataCache;
+import com.metro.backend.dto.RouteResponse;
 import com.metro.backend.entity.sqlite.Connections;
 import com.metro.backend.entity.sqlite.Interchanges;
 import com.metro.backend.entity.sqlite.Station;
-import com.metro.backend.repository.sqlite.ConnectionRepository;
-import com.metro.backend.repository.sqlite.InterchangeRepository;
-import com.metro.backend.repository.sqlite.StationRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class RouteService {
 
-    private final StationRepository stationRepository;
-    private final ConnectionRepository connectionRepository;
-    private final InterchangeRepository interchangeRepository;
+    private final Dijkstra dijkstra;
 
-    public RouteService(StationRepository stationRepository,ConnectionRepository connectionRepository,InterchangeRepository interchangeRepository){
-        this.stationRepository = stationRepository;
-        this.connectionRepository = connectionRepository;
-        this.interchangeRepository = interchangeRepository;
-    }
-
-    public void localData(){
-        List<Station> stations = stationRepository.findAll();
-        List<Connections> connections = connectionRepository.findAll();
-        List<Interchanges> interchanges = interchangeRepository.findAll();
-
-
+    public RouteService(Dijkstra dijkstra){
+        this.dijkstra = dijkstra;
     }
 
 
-
+    public RouteResponse routeDetails(String source, String destination){
+        return dijkstra.findShortestPath(source, destination);
+    }
 }
