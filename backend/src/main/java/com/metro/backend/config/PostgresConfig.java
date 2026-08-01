@@ -13,6 +13,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -42,10 +45,15 @@ public class PostgresConfig {
     public LocalContainerEntityManagerFactoryBean postgresEntityManagerFactory(
             EntityManagerFactoryBuilder builder) {
 
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
         return builder
                 .dataSource(postgresDataSource())
                 .packages("com.metro.backend.entity.postgres")
                 .persistenceUnit("postgres")
+                .properties(properties)
                 .build();
     }
 

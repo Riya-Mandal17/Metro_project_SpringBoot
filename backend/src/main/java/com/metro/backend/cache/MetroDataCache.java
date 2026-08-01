@@ -11,8 +11,6 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 public class MetroDataCache {
@@ -21,9 +19,10 @@ public class MetroDataCache {
     private final ConnectionRepository connectionRepository;
     private final InterchangeRepository interchangeRepository;
 
+    private List<Station> stations;
     private Map<Integer, Station> stationMap;
     private Map<Integer, List<Edge>> graph;
-    private List<Station> stations;
+    private Map<String, List<Integer>> stationIdByName;
     
 
     public MetroDataCache(StationRepository stationRepository,
@@ -43,12 +42,15 @@ public class MetroDataCache {
         List<Interchanges> interchanges = interchangeRepository.findAll();
 
         // Station lookup
-        stationMap = stations.stream()
-                .collect(Collectors.toMap(
-                        Station::getId,
-                        Function.identity()
-                ));
+        stationMap = new HashMap<>();
+        stationIdByName = new HashMap<>();
+        for (Station station : stations){
+            String stationName = station.getName();
+            stationIdByName.computeIfAbsent(stationName, k -> new ArrayList<>());
+            stationIdByName.get(stationName).add(station.getId());
 
+            stationMap.put(station.getId(), station);
+        }
     
 
         // Graph
@@ -136,4 +138,7 @@ public class MetroDataCache {
         return this.stations;
     }
 
+    public List<Integer> getStationIdByName(String name){
+        return stationIdByName.getOrDefault(name, Collections.emptyList());
+    }
 }

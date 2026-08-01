@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManagerFactory;
 //import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -40,10 +42,15 @@ public class SQLiteConfig {
     public LocalContainerEntityManagerFactoryBean sqliteEntityManagerFactory(
             EntityManagerFactoryBuilder builder) {
 
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        properties.put("hibernate.dialect", "org.hibernate.community.dialect.SQLiteDialect");
+
         return builder
                 .dataSource(sqliteDataSource())
                 .packages("com.metro.backend.entity.sqlite")
                 .persistenceUnit("sqlite")
+                .properties(properties)
                 .build();
     }
 
