@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import SystemStatus from './components/SystemStatus';
-import RouteSelector from './components/RouteSelector';
-import Dashboard from './components/Dashboard';
-import { Train } from 'lucide-react';
+import React, { useState } from "react";
+import SystemStatus from "./components/SystemStatus";
+import RouteSelector from "./components/RouteSelector";
+import Dashboard from "./components/Dashboard";
+import { Train } from "lucide-react";
 
 export default function App() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -10,44 +10,59 @@ export default function App() {
   const [secretCode, setSecretCode] = useState(null);
 
   const handleTicketBooked = () => {
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
-  const handleStatusVerified = (unlocked, code) => {
+  const handleStatusVerified = (unlocked) => {
     setIsSystemUnlocked(unlocked);
-    setSecretCode(code);
+    // setSecretCode(code);
   };
 
   return (
     <div className="min-h-screen text-slate-800 flex flex-col font-sans bg-slate-50">
-      
       {/* 1. National Tricolor Strip */}
       <div className="h-1.5 w-full flex">
         <div className="bg-[#FF9933] w-1/3 h-full" /> {/* Saffron */}
-        <div className="bg-white w-1/3 h-full" />      {/* White */}
-        <div className="bg-[#128807] w-1/3 h-full" />  {/* India Green */}
+        <div className="bg-white w-1/3 h-full" /> {/* White */}
+        <div className="bg-[#128807] w-1/3 h-full" /> {/* India Green */}
       </div>
 
       {/* 2. Top Accessibility & Official Govt Metadata Bar */}
       <div className="bg-slate-100 border-b border-slate-200 py-1.5 px-6 text-[11px] text-slate-600 font-medium hidden sm:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-4">
-            <span className="hover:underline cursor-pointer">भारत सरकार | Govt. of India</span>
+            <span className="hover:underline cursor-pointer">
+              भारत सरकार | Govt. of India
+            </span>
             <span className="text-slate-300">|</span>
-            <span className="hover:underline cursor-pointer">पश्चिम बंगाल सरकार | Govt. of West Bengal</span>
+            <span className="hover:underline cursor-pointer">
+              पश्चिम बंगाल सरकार | Govt. of West Bengal
+            </span>
           </div>
           <div className="flex gap-4 items-center">
-            <span className="hover:underline cursor-pointer">Skip to Main Content</span>
-            <span>|</span>
-            <span className="hover:underline cursor-pointer">Screen Reader Access</span>
-            <span>|</span>
-            <span className="flex items-center gap-1 font-bold">
-              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">A-</span>
-              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">A</span>
-              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">A+</span>
+            <span className="hover:underline cursor-pointer">
+              Skip to Main Content
             </span>
             <span>|</span>
-            <span className="font-semibold text-slate-700 cursor-pointer">English | বাংলা | हिंदी</span>
+            <span className="hover:underline cursor-pointer">
+              Screen Reader Access
+            </span>
+            <span>|</span>
+            <span className="flex items-center gap-1 font-bold">
+              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">
+                A-
+              </span>
+              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">
+                A
+              </span>
+              <span className="px-1 bg-slate-200 border border-slate-300 rounded cursor-pointer text-[10px] hover:bg-slate-300">
+                A+
+              </span>
+            </span>
+            <span>|</span>
+            <span className="font-semibold text-slate-700 cursor-pointer">
+              English | বাংলা | हिंदी
+            </span>
           </div>
         </div>
       </div>
@@ -73,25 +88,36 @@ export default function App() {
                 Kolkata Metro Rail Corporation Limited
               </h2>
               <p className="text-[9px] font-bold text-[#128807] uppercase tracking-wider mt-0.5">
-                A Joint Venture of Ministry of Railways, Govt. of India & Govt. of West Bengal
+                A Joint Venture of Ministry of Railways, Govt. of India & Govt.
+                of West Bengal
               </p>
             </div>
           </div>
-          
+
           {/* Status Indicator Panel */}
-          <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 shadow-inner">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                isSystemUnlocked ? 'bg-emerald-500' : 'bg-rose-500'
-              }`} />
-              <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
-                isSystemUnlocked ? 'bg-emerald-600' : 'bg-rose-600'
-              }`} />
+          <div className="flex flex-col items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 shadow-inner">
+            {/* First row */}
+            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
+              System Status
             </span>
-            <div className="text-left">
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Security Gateway</span>
+
+            {/* Second row */}
+            <div className="flex items-center justify-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span
+                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                    isSystemUnlocked ? "bg-emerald-500" : "bg-rose-500"
+                  }`}
+                />
+                <span
+                  className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+                    isSystemUnlocked ? "bg-emerald-600" : "bg-rose-600"
+                  }`}
+                />
+              </span>
+
               <span className="text-xs font-bold text-slate-700">
-                {isSystemUnlocked ? 'Verification Active' : 'Offline Mode'}
+                {isSystemUnlocked ? "Online" : "Offline"}
               </span>
             </div>
           </div>
@@ -124,30 +150,44 @@ export default function App() {
           <div className="bg-white w-1/3 h-full" />
           <div className="bg-[#128807] w-1/3 h-full" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto py-8 px-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-300">
           <div>
-            <h4 className="font-bold text-sm text-white mb-2 uppercase">Kolkata Metro Rail Corporation</h4>
+            <h4 className="font-bold text-sm text-white mb-2 uppercase">
+              Kolkata Metro Rail Corporation
+            </h4>
             <p className="leading-relaxed">
-              HRBC Complex, KMRCL Bhawan, Munshi Premchand Sarani, Kolkata, West Bengal 700021.
+              HRBC Complex, KMRCL Bhawan, Munshi Premchand Sarani, Kolkata, West
+              Bengal 700021.
               <br />
-              Official Portal for Smart Card Recharge, Ticket QR Booking, and System Diagnostics.
+              Official Portal for Smart Card Recharge, Ticket QR Booking, and
+              System Diagnostics.
             </p>
           </div>
           <div className="md:text-right flex flex-col justify-between">
             <p className="leading-relaxed">
-              Content owned, updated and maintained by Kolkata Metro Rail Corporation Limited (KMRCL).
+              Content owned, updated and maintained by Kolkata Metro Rail
+              Corporation Limited (KMRCL).
               <br />
-              Page last updated: {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}.
+              Page last updated:{" "}
+              {new Date().toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+              .
             </p>
             <p className="text-[10px] text-slate-400 mt-4">
-              Designed & developed in association with National Informatics Centre (NIC) / Government Hosting Portal.
+              Designed & developed in association with National Informatics
+              Centre (NIC) / Government Hosting Portal.
             </p>
           </div>
         </div>
-        
+
         <div className="bg-[#0b1d3a] py-3 text-center text-[10px] text-slate-400 border-t border-slate-800">
-          <p>© 2026 Kolkata Metro Rail Corporation Limited. All Rights Reserved.</p>
+          <p>
+            © 2026 Kolkata Metro Rail Corporation Limited. All Rights Reserved.
+          </p>
         </div>
       </footer>
     </div>
