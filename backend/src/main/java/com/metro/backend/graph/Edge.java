@@ -5,16 +5,18 @@ public class Edge {
     private final int destinationStationId;
     private final int travelTime;
     private final int fare;
-    private final boolean isInterchange;
+    private final boolean interchange;
 
-    public Edge(int destinationStationId,
-                int travelTime,
-                int fare, boolean isInterchange) {
+    public Edge(
+            int destinationStationId,
+            int travelTime,
+            int fare,
+            boolean interchange) {
 
         this.destinationStationId = destinationStationId;
         this.travelTime = travelTime;
         this.fare = fare;
-        this.isInterchange = isInterchange;
+        this.interchange = interchange;
     }
 
     public int getDestinationStationId() {
@@ -29,7 +31,7 @@ public class Edge {
         return fare;
     }
 
-    public boolean getIsInterchange(){
-        return this.isInterchange;
+    public boolean isInterchange() {
+        return interchange;
     }
 }

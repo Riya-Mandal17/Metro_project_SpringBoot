@@ -11,12 +11,11 @@ export const getSystemStatus = () => API.get('/status');
 export const getAllStations = () => API.get('/allstations');
 export const getRoute = (source, destination) => API.get('/route', { params: { source, destination } });
 export const getTickets = () => API.get('/tickets');
-export const bookTicket = (source, destination, fare, expiresInMinutes = 60) => 
+export const bookTicket = (source, destination, fare) => 
   API.post('/tickets', { 
-    source, 
-    destination, 
-    fare, 
-    expires_in_minutes: expiresInMinutes 
+    source_station: source, 
+    destination_station : destination, 
+    fare
   });
 
 export default API;

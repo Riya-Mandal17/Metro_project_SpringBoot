@@ -32,7 +32,6 @@ public class TicketService {
                 .toUpperCase();
 
         ticket.setTicket_number(ticketNum);
-
         return ticketRepository.save(ticket);
     }
 }

@@ -14,7 +14,7 @@ public class Ticket {
     private String source_station;
     private String destination_station;
     private double fare;
-    private String status;
+    private String status = "ACTIVE";
     private LocalDateTime created_at;
     private LocalDateTime expires_at;
 

@@ -23,7 +23,7 @@ public class RouteResponse {
     }*/
 
     private String source;
-    private String detination;
+    private String destination;
     private int total_travel_time_minutes;
     private int total_fare_inr;
     private int interchanges_count;
@@ -33,13 +33,13 @@ public class RouteResponse {
     public RouteResponse() {}
 
     // Parameterized Constructor
-    public RouteResponse(String source, String detination,
+    public RouteResponse(String source, String destination,
                         int total_travel_time_minutes,
                         int total_fare_inr,
                         int interchanges_count,
                         List<Itinerary> ordered_itinerary) {
         this.source = source;
-        this.detination = detination;
+        this.destination = destination;
         this.total_travel_time_minutes = total_travel_time_minutes;
         this.total_fare_inr = total_fare_inr;
         this.interchanges_count = interchanges_count;
@@ -54,12 +54,12 @@ public class RouteResponse {
         this.source = source;
     }
 
-    public String getDetination() {
-        return detination;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setDetination(String detination) {
-        this.detination = detination;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public int getTotal_travel_time_minutes() {

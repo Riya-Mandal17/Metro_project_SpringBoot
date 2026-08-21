@@ -202,7 +202,6 @@ export default function RouteSelector({ onTicketBooked }) {
     try {
       const response = await getRoute(source.name, destination.name);
       setRouteData(response.data);
-       console.log(response.data);
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.detail || "Failed to calculate metro route.");
@@ -218,8 +217,8 @@ export default function RouteSelector({ onTicketBooked }) {
     setSuccessMsg('');
 
     try {
-      const { source: src, destination: dest, total_fare_inr: fare } = routeData.route_summary;
-      const response = await bookTicket(src, dest, fare, 30); // expires in 30 minutes
+      const { source: src, destination: dest, total_fare_inr: fare } = routeData;
+      const response = await bookTicket(src, dest, fare);
       setSuccessMsg(`Ticket booked successfully! Number: ${response.data.ticket_number}`);
       if (onTicketBooked) {
         onTicketBooked();
@@ -300,19 +299,19 @@ export default function RouteSelector({ onTicketBooked }) {
             <div className="text-center">
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 block">Total Fare</span>
               <span className="text-sm font-extrabold text-emerald-700 flex items-center justify-center gap-0.5 mt-0.5">
-                <Banknote className="w-4 h-4" /> ₹{routeData.route_summary.total_fare_inr}
+                <Banknote className="w-4 h-4" /> ₹{routeData.total_fare_inr}
               </span>
             </div>
             <div className="text-center border-x border-slate-200">
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 block">Travel Time</span>
               <span className="text-sm font-extrabold text-slate-700 flex items-center justify-center gap-0.5 mt-0.5">
-                <Clock className="w-4 h-4" /> {routeData.route_summary.total_travel_time_minutes} min
+                <Clock className="w-4 h-4" /> {routeData.total_travel_time_minutes} min
               </span>
             </div>
             <div className="text-center">
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 block">Interchanges</span>
               <span className="text-sm font-extrabold text-indigo-700 flex items-center justify-center gap-0.5 mt-0.5">
-                <Shuffle className="w-4 h-4" /> {routeData.route_summary.interchanges_count}
+                <Shuffle className="w-4 h-4" /> {routeData.interchanges_count}
               </span>
             </div>
           </div>
@@ -358,7 +357,7 @@ export default function RouteSelector({ onTicketBooked }) {
             className="w-full py-2.5 px-4 font-bold text-sm text-center rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center justify-center gap-2 shadow-sm"
           >
             <Ticket className="w-4 h-4" />
-            {booking ? "Generating QR Ticket..." : `Book Official QR Ticket (₹${routeData.route_summary.total_fare_inr})`}
+            {booking ? "Generating QR Ticket..." : `Book Official QR Ticket (₹${routeData.total_fare_inr})`}
           </button>
         </div>
       )}
